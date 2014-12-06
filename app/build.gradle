@@ -6,15 +6,21 @@ android {
 
     defaultConfig {
         applicationId "net.skink.wow1"
-        minSdkVersion 19
+        // jfd 19 for minsdk version changed to 21
+        minSdkVersion 21
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // JFD this has a build warning/
+            // Then you must be using runProguard somewhere. It was renamed to minifyEnabled. ﻿
+//            runProguard false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+//            runProguard false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
