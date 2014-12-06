@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
     package="net.skink.wow1" >
+
     <uses-sdk android:maxSdkVersion="21"
               android:targetSdkVersion="21"
               android:minSdkVersion="21" />
@@ -11,6 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
             android:name="net.skink.wow1.MainActivity"
             android:label="@string/app_name" >
@@ -20,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="net.skink.wow1.DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
@@ -28,6 +32,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.skink.wow1.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>
