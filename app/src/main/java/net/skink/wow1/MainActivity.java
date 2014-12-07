@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
@@ -20,8 +21,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -60,11 +59,31 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void sendMessage(View view) {
         Intent intent = new Intent(this,DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+    }
+
+    public void onClickToBase64(View view) {
+        EditText editTextHex = (EditText) findViewById(R.id.editTextHex);
+        String stringHex = editTextHex.getText().toString();
+        EditText editTextBase64 = (EditText) findViewById(R.id.editTextBase64);
+//        base64.setTextSize(20);
+        editTextBase64.setText(stringHex);
+
+    }
+
+    public void onClickToHex(View view) {
+
+        EditText editTextBase64 = (EditText) findViewById(R.id.editTextBase64);
+        String stringBase64 = editTextBase64.getText().toString();
+        EditText editTextHex = (EditText) findViewById(R.id.editTextHex);
+        editTextHex.setText(stringBase64);
+
+
     }
 }
