@@ -10,4 +10,17 @@
         android:icon="@drawable/ic_action_compose"
         android:title="@string/action_compose"
         android:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_toAscii"
+        android:icon="@drawable/ic_action_to_ascii"
+        android:title="@string/action_toAscii"
+        android:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_toHex"
+        android:icon="@drawable/ic_action_to_hex"
+        android:title="@string/action_toHex"
+        android:showAsAction="ifRoom"/>
+
+
+
 </menu>

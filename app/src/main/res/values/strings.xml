@@ -10,6 +10,11 @@
         <string name="action_search">action search</string>
         <string name="action_compose">action compose</string>
 
+    <string name="action_toAscii">action to ascii</string>
+    <string name="action_toHex">action to hex</string>
+
+
+
 
         <!-- Row 1 widgets -->
         <string name="edit_message">Enter a message</string>

@@ -1,6 +1,5 @@
 package net.skink.wow1;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 
 public class MainActivity extends Activity {
@@ -51,18 +49,107 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        // handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_toAscii:
+                onActionClickToAscii();
+                        return true;
+            case R.id.action_toHex:
+                onActionClickToHex();
+                return true;
+            case R.id.action_settings:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
         }
 
-        return super.onOptionsItemSelected(item);
+
     }
+
+
+    public void onClickToAscii2() {
+
+        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
+        String stringInput = editTextInput.getText().toString();
+
+        byte[] b = stringInput.getBytes();
+        Log.d("JFD", "b = " + b[0] + b[1] + b[2]);
+
+        String stringConverted = Arrays.toString(b);
+        Log.d("JFD", "stringConverted = " + stringConverted);
+
+        //        String response = "[-47, 1, 16, 84, 2, 101, 110, 83, 111, 109, 101, 32, 78, 70, 67, 32, 68, 97, 116, 97]";      // response from the Python script
+//
+//        String[] byteValues = response.substring(1, response.length() - 1).split(",");
+//        byte[] bytes = new byte[byteValues.length];
+//
+//        for (int i=0, len=bytes.length; i<len; i++) {
+//            bytes[i] = Byte.parseByte(byteValues[i].trim());
+//        }
+//
+//        String str = new String(bytes);
+
+        String[] byteValues = stringConverted.substring(1, stringConverted.length() - 1).split(",");
+        Log.d("JFD", "byteValues = " + byteValues[0]);
+        byte[] bytes = new byte[byteValues.length];
+        for (int i=0, len=bytes.length; i<len; i++) {
+            bytes[i] = Byte.parseByte(byteValues[i].trim());
+        }
+        Log.d("JFD", "bytes = " + bytes[0]);
+        stringConverted = new String(bytes);
+
+
+
+
+
+//        example #5
+//        byte[] b1 = new byte[] {97, 98, 99};
+//
+//        String s1 = Arrays.toString(b1);
+//        String s2 = new String(b1);
+//
+//        System.out.println(s1);        // -> "[97, 98, 99]"
+//        System.out.println(s2);        // -> "abc";
+//
+//         s1 holds the string representation of the array b1, while
+//         s2 holds the string representation of the bytes contained in b1.
+//
+//         Your server returns a string similar to s1, therefore to get
+//         the array representation back, you need the opposite constructor method.
+//
+//         If s2.getBytes() is the opposite of new String(b1), you need to
+//         find the opposite of Arrays.toString(b1), thus the code I pasted here
+//         for example:
+//
+//        :
+//        String response = "[-47, 1, 16, 84, 2, 101, 110, 83, 111, 109, 101, 32, 78, 70, 67, 32, 68, 97, 116, 97]";      // response from the Python script
+//
+//        String[] byteValues = response.substring(1, response.length() - 1).split(",");
+//        byte[] bytes = new byte[byteValues.length];
+//
+//        for (int i=0, len=bytes.length; i<len; i++) {
+//            bytes[i] = Byte.parseByte(byteValues[i].trim());
+//        }
+//
+//        String str = new String(bytes);
+//
+        ////
+
+
+
+
+        EditText editTextOutput = (EditText) findViewById(R.id.editTextOutput);
+        editTextOutput.setText(stringConverted);
+
+
+    }
+
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this,DisplayMessageActivity.class);
@@ -72,7 +159,69 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+
+    public void onActionClickToHex() {
+
+
+        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
+        String stringInput = editTextInput.getText().toString();
+
+
+        byte[] b = stringInput.getBytes();
+        Log.d("JFD", "b = " + b[0] + b[1] + b[2]);
+
+        String stringConverted = Arrays.toString(b);
+        Log.d("JFD", "stringConverted = " + stringConverted);
+
+
+        EditText editTextOutput = (EditText) findViewById(R.id.editTextOutput);
+        editTextOutput.setText(stringConverted);
+
+
+        return ;
+    }
+
+
+    public void onActionClickToAscii() {
+
+
+        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
+        String stringInput = editTextInput.getText().toString();
+        String stringHex = stringInput;
+
+
+        StringBuilder sb = new StringBuilder();
+        StringBuilder temp = new StringBuilder();
+
+        //49204c6f7665204a617661 split into two characters 49, 20, 4c...
+        for (int i = 0; i < stringHex.length() - 1; i += 2) {
+
+            //grab the hex in pairs
+            String output = stringHex.substring(i, (i + 2));
+            //convert hex to decimal
+            int decimal = Integer.parseInt(output, 16);
+            //convert the decimal to character
+            sb.append((char) decimal);
+
+            temp.append(decimal);
+        }
+        Log.d("JFD", "Decimal : " + temp.toString());
+        Log.d("JFD", "sb.toString : " + sb.toString());
+
+
+
+
+        String stringConverted = sb.toString();
+
+        EditText editTextOutput = (EditText) findViewById(R.id.editTextOutput);
+        editTextOutput.setText(stringConverted);
+
+
+        return ;
+    }
+
     public void onClickToBase64(View view) {
+
         EditText editTextHex = (EditText) findViewById(R.id.editTextHex);
         String stringHex = editTextHex.getText().toString();
 
@@ -138,6 +287,9 @@ public class MainActivity extends Activity {
 
     }
 
+
+
+
     public void onClickToHex(View view) {
 
         EditText editTextBase64 = (EditText) findViewById(R.id.editTextBase64);
@@ -147,4 +299,7 @@ public class MainActivity extends Activity {
 
 
     }
+
+
+
 }
