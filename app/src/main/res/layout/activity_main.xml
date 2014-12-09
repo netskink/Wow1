@@ -17,18 +17,82 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In"
+            android:id="@+id/textView"
+            android:singleLine="true"
+            android:minWidth="25dp"
+            android:nestedScrollingEnabled="true"
+            android:maxWidth="25dp" />
+
         <EditText
-            android:id="@+id/edit_message"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/edit_message"/>
+            android:id="@+id/editTextInput"
+            android:layout_weight="1"
+            android:hint="Enter hex: 3f403031, ascii text, ?@01" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_send"
-            android:onClick="sendMessage"/>
+            android:text="@string/button_toClear"
+            android:id="@+id/buttonClear"
+            android:onClick="onClickToClearInput" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Out"
+            android:id="@+id/textView2"
+            android:minWidth="25dp"
+            android:maxWidth="25dp" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextOutput"
+            android:layout_weight="1"
+            android:textIsSelectable="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_toInput"
+            android:id="@+id/buttonInput"
+            android:onClick="onClickToInput" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextBase64"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:inputType="textMultiLine"
+            android:ems="10"
+
+            android:hint="@string/edit_base64"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_toHex"
+            android:onClick="onClickToHex" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,65 +126,17 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/editTextBase64"
+            android:id="@+id/edit_message"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
-            android:inputType="textMultiLine"
-            android:ems="10"
-
-            android:hint="@string/edit_base64"
-            />
+            android:hint="@string/edit_message"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_toHex"
-            android:onClick="onClickToHex" />
+            android:text="@string/button_send"
+            android:onClick="sendMessage"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="In"
-            android:id="@+id/textView"
-            android:singleLine="true"
-            android:minWidth="25dp"
-            android:nestedScrollingEnabled="true"
-            android:maxWidth="25dp" />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextInput"
-            android:layout_weight="1"
-            android:hint="Enter hex: 3f40, " />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Out"
-            android:id="@+id/textView2"
-            android:minWidth="25dp"
-            android:maxWidth="25dp" />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextOutput"
-            android:layout_weight="1" />
-    </LinearLayout>
 </LinearLayout>

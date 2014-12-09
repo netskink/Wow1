@@ -1,6 +1,8 @@
 package net.skink.wow1;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
@@ -10,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -57,20 +60,156 @@ public class MainActivity extends Activity {
         // handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_toAscii:
-                onActionClickToAscii();
-                        return true;
-            case R.id.action_toHex:
-                onActionClickToHex();
+                onActionToAscii();
                 return true;
+
+            case R.id.action_toHex:
+                onActionToHex();
+                return true;
+
+            case R.id.action_Copy:
+                onActionCopy();
+                return true;
+
+            case R.id.action_Delete:
+                onActionDelete();
+                return true;
+
+            case R.id.action_SelectAll:
+                onActionSelectAll();
+                return true;
+
             case R.id.action_settings:
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
 
         }
 
+    }
+
+    public void onActionCopy() {
+
+        View v = getCurrentFocus();
+        int id = v.getId();
+        EditText editText = (EditText) findViewById(id);
+
+
+
+        String text = editText.getText().toString();
+
+        // Gets a handle to the clipboard service.
+        ClipboardManager myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        // Creates a new text clip to put on the clipboard
+        ClipData myClip = ClipData.newPlainText("simple text",text);
+        //myClip = ClipData.newPlainText("text", text);
+        myClipboard.setPrimaryClip(myClip);
+        Toast.makeText(getApplicationContext(), "Text Copied", Toast.LENGTH_SHORT).show();
 
     }
+
+
+    public void onActionDelete() {
+
+        View v = getCurrentFocus();
+        int id = v.getId();
+        EditText editText = (EditText) findViewById(id);
+        editText.setText("");
+    }
+
+
+    public void onActionSelectAll() {
+
+        View v = getCurrentFocus();
+        int id = v.getId();
+        EditText editText = (EditText) findViewById(id);
+
+        editText.selectAll();
+
+    }
+
+    public void onActionToAscii() {
+
+
+        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
+        String stringInput = editTextInput.getText().toString();
+        String stringHex = stringInput;
+
+        EditText editTextOutput = (EditText) findViewById(R.id.editTextOutput);
+
+
+        StringBuilder sb = new StringBuilder();
+        StringBuilder temp = new StringBuilder();
+
+        //49204c6f7665204a617661 split into two characters 49, 20, 4c...
+        for (int i = 0; i < stringHex.length() - 1; i += 2) {
+
+            //grab the hex in pairs
+            String output = stringHex.substring(i, (i + 2));
+            //convert hex to decimal
+            try {
+                int decimal = Integer.parseInt(output, 16);
+                //convert the decimal to character
+                sb.append((char) decimal);
+
+                temp.append(decimal);
+
+            }catch( Exception e){
+                Log.d("JFD", "Not a hex sequence");
+                editTextOutput.setText("error, input sequence must be hex string");
+                return;
+            }
+        }
+        Log.d("JFD", "Decimal : " + temp.toString());
+        Log.d("JFD", "sb.toString : " + sb.toString());
+
+
+        String stringConverted = sb.toString();
+
+        editTextOutput.setText(stringConverted);
+
+    }
+
+
+    public void onActionToHex() {
+
+        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
+        String stringInput = editTextInput.getText().toString();
+
+
+        byte[] b = stringInput.getBytes();
+        Log.d("JFD", "b = " + b[0] + b[1] + b[2]);
+
+        // b[n] = decimal ascii value
+
+        StringBuilder sb = new StringBuilder();
+
+        //49204c6f7665204a617661 split into two characters 49, 20, 4c...
+        for (int i = 0; i < b.length; i++) {
+
+            //grab the decimal as individual decimal ascii values
+            //int decimal = Integer.parseInt(b[i], 10);
+            //convert the decimal to character
+            sb.append(Integer.toHexString(b[i]));
+
+//            int decimal = Integer.parseInt( b[i].toString() , 1);
+
+        }
+        Log.d("JFD", "sb.toString : " + sb.toString());
+
+        String stringConverted = sb.toString();
+        EditText editTextOutput = (EditText) findViewById(R.id.editTextOutput);
+        editTextOutput.setText(stringConverted);
+
+    }
+
+
+
+
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+
 
 
     public void onClickToAscii2() {
@@ -103,9 +242,6 @@ public class MainActivity extends Activity {
         }
         Log.d("JFD", "bytes = " + bytes[0]);
         stringConverted = new String(bytes);
-
-
-
 
 
 //        example #5
@@ -141,84 +277,30 @@ public class MainActivity extends Activity {
 //
         ////
 
-
-
-
         EditText editTextOutput = (EditText) findViewById(R.id.editTextOutput);
         editTextOutput.setText(stringConverted);
-
 
     }
 
 
+
+
+
+
+
     public void sendMessage(View view) {
+
         Intent intent = new Intent(this,DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+
     }
 
 
-    public void onActionClickToHex() {
 
 
-        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
-        String stringInput = editTextInput.getText().toString();
-
-
-        byte[] b = stringInput.getBytes();
-        Log.d("JFD", "b = " + b[0] + b[1] + b[2]);
-
-        String stringConverted = Arrays.toString(b);
-        Log.d("JFD", "stringConverted = " + stringConverted);
-
-
-        EditText editTextOutput = (EditText) findViewById(R.id.editTextOutput);
-        editTextOutput.setText(stringConverted);
-
-
-        return ;
-    }
-
-
-    public void onActionClickToAscii() {
-
-
-        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
-        String stringInput = editTextInput.getText().toString();
-        String stringHex = stringInput;
-
-
-        StringBuilder sb = new StringBuilder();
-        StringBuilder temp = new StringBuilder();
-
-        //49204c6f7665204a617661 split into two characters 49, 20, 4c...
-        for (int i = 0; i < stringHex.length() - 1; i += 2) {
-
-            //grab the hex in pairs
-            String output = stringHex.substring(i, (i + 2));
-            //convert hex to decimal
-            int decimal = Integer.parseInt(output, 16);
-            //convert the decimal to character
-            sb.append((char) decimal);
-
-            temp.append(decimal);
-        }
-        Log.d("JFD", "Decimal : " + temp.toString());
-        Log.d("JFD", "sb.toString : " + sb.toString());
-
-
-
-
-        String stringConverted = sb.toString();
-
-        EditText editTextOutput = (EditText) findViewById(R.id.editTextOutput);
-        editTextOutput.setText(stringConverted);
-
-
-        return ;
-    }
 
     public void onClickToBase64(View view) {
 
@@ -227,7 +309,6 @@ public class MainActivity extends Activity {
 
         //          String converted = Base64.encodeToString(toConvert.toString().getBytes(), Base64.DEFAULT));
         String stringConverted = Base64.encodeToString(stringHex.toString().getBytes(),Base64.DEFAULT );
-
 
 
         // example code #1
@@ -279,13 +360,14 @@ public class MainActivity extends Activity {
         //That's it. A single line encoding and decoding.
 
 
-
-
         EditText editTextBase64 = (EditText) findViewById(R.id.editTextBase64);
 //        base64.setTextSize(20);
         editTextBase64.setText(stringConverted);
 
     }
+
+
+
 
 
 
@@ -296,10 +378,27 @@ public class MainActivity extends Activity {
         String stringBase64 = editTextBase64.getText().toString();
         EditText editTextHex = (EditText) findViewById(R.id.editTextHex);
         editTextHex.setText(stringBase64);
-
-
     }
 
 
+
+
+    public void onClickToClearInput(View view) {
+
+        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
+        editTextInput.setText("");
+    }
+
+
+    public void onClickToInput(View view) {
+
+        EditText editTextOutput = (EditText) findViewById(R.id.editTextOutput);
+        String stringOutput = editTextOutput.getText().toString();
+
+
+        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
+        editTextInput.setText(stringOutput);
+
+    }
 
 }

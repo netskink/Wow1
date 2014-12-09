@@ -7,11 +7,16 @@
     <!-- Activity Main Strings -->
         <!-- Action bar strings -->
         <string name="action_settings">Settings</string>
-        <string name="action_search">action search</string>
-        <string name="action_compose">action compose</string>
 
-    <string name="action_toAscii">action to ascii</string>
-    <string name="action_toHex">action to hex</string>
+    <string name="action_toAscii">to ascii text</string>
+    <string name="action_toHex">to hex chars a</string>
+    <string name="action_copy">copy</string>
+    <string name="action_delete">delete</string>
+    <string name="action_select_all">select all</string>
+
+
+    <string name="button_toClear">Clear</string>
+    <string name="button_toInput">to Input</string>
 
 
 
@@ -21,7 +26,7 @@
         <string name="button_send">Send</string>
 
         <!-- Row 2 widgets -->
-        <string name="edit_hex">Enter hex</string>
+        <string name="edit_hex">Enter text</string>
         <string name="button_toBase64">to x64</string>
 
 
