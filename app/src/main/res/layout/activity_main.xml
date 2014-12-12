@@ -12,6 +12,63 @@
 
     tools:context=".MainActivity">
 
+
+
+    <!-- row 1 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Input Format"
+            android:id="@+id/textView3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hex"
+                android:onClick="onRadioButtonInClicked"
+                android:id="@+id/radioButtonInHex" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Decimal"
+                android:onClick="onRadioButtonInClicked"
+                android:id="@+id/radioButtonInDecimal" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Base64"
+                android:id="@+id/radioButtonInBase64" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Text"
+                android:onClick="onRadioButtonInClicked"
+                android:id="@+id/radioButtonInText" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <!-- row 2 -->
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -32,7 +89,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTextInput"
             android:layout_weight="1"
-            android:hint="Enter hex: 3f403031, ascii text, ?@01" />
+            android:password="false"
+            android:textIsSelectable="false" />
 
         <Button
             android:layout_width="wrap_content"
@@ -41,6 +99,65 @@
             android:id="@+id/buttonClear"
             android:onClick="onClickToClearInput" />
 
+    </LinearLayout>
+
+
+
+
+    <!-- row 3 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Output Format"
+            android:id="@+id/textView4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:onClick="onRadioButtonOutClicked">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hex"
+                android:id="@+id/radioButtonOutHex"
+                android:singleLine="true"
+                android:onClick="onRadioButtonOutClicked" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Decimal"
+                android:id="@+id/radioButtonOutDecimal"
+                android:onClick="onRadioButtonOutClicked" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Base64"
+                android:id="@+id/radioButtonOutBase64"
+                android:onClick="onRadioButtonOutClicked" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Text"
+                android:id="@+id/radioButtonOutText"
+                android:onClick="onRadioButtonOutClicked" />
+
+        </RadioGroup>
     </LinearLayout>
 
     <LinearLayout
@@ -60,83 +177,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/editTextOutput"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:textIsSelectable="true" />
 
-        <Button
+        <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_toInput"
-            android:id="@+id/buttonInput"
-            android:onClick="onClickToInput" />
+            android:id="@+id/spinner" />
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/editTextBase64"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:inputType="textMultiLine"
-            android:ems="10"
-
-            android:hint="@string/edit_base64"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_toHex"
-            android:onClick="onClickToHex" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/editTextHex"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:inputType="textMultiLine"
-            android:ems="10"
-
-            android:hint="@string/edit_hex"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_toBase64"
-            android:onClick="onClickToBase64" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/edit_message"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/edit_message"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_send"
-            android:onClick="sendMessage"/>
-    </LinearLayout>
 
 </LinearLayout>

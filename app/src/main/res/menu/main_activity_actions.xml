@@ -2,15 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
 
-    <item android:id="@+id/action_toAscii"
-        android:icon="@drawable/ic_action_to_ascii"
-        android:title="@string/action_toAscii"
-        android:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/action_toHex"
-        android:icon="@drawable/ic_action_to_hex"
-        android:title="@string/action_toHex"
-        android:showAsAction="ifRoom"/>
 
     <item android:id="@+id/action_SelectAll"
         android:icon="@drawable/ic_action_select_all"
@@ -27,6 +19,8 @@
         android:icon="@drawable/ic_action_delete"
         android:title="@string/action_delete"
         android:showAsAction="ifRoom"/>
+
+
 
 
 

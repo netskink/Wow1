@@ -10,6 +10,7 @@
 
     <application
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -24,14 +25,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="net.skink.wow1.DisplayMessageActivity"
-            android:label="@string/title_activity_display_message"
-            android:parentActivityName="net.skink.wow1.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.skink.wow1.MainActivity" />
-        </activity>
 
     </application>
 

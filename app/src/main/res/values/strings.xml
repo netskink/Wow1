@@ -8,8 +8,14 @@
         <!-- Action bar strings -->
         <string name="action_settings">Settings</string>
 
-    <string name="action_toAscii">to ascii text</string>
-    <string name="action_toHex">to hex chars a</string>
+    <string name="action_to_ascii">to ascii text</string>
+    <string name="action_to_hex">to hex chars a</string>
+    <string name="action_to_base64">to base64</string>
+    <string name="action_to_text">to text</string>
+    <string name="action_to_decimal">to decimal</string>
+
+
+
     <string name="action_copy">copy</string>
     <string name="action_delete">delete</string>
     <string name="action_select_all">select all</string>
@@ -19,26 +25,38 @@
     <string name="button_toInput">to Input</string>
 
 
+    <string name="hint_hex">Enter hex: 3f0d</string>
+    <string name="hint_decimal">Enter decimal: 1234</string>
+    <string name="hint_base64">Enter base64: SSdt</string>
+    <string name="hint_text">Enter text: Hello</string>
 
 
         <!-- Row 1 widgets -->
-        <string name="edit_message">Enter a message</string>
-        <string name="button_send">Send</string>
 
         <!-- Row 2 widgets -->
-        <string name="edit_hex">Enter text</string>
-        <string name="button_toBase64">to x64</string>
 
 
         <!-- Row 3 widgets -->
-        <string name="edit_base64">Enter base64</string>
-        <string name="button_toHex">to Hex</string>
+
+    <string-array name="output_action_array">
+        <item></item>
+        <item>to Input</item>
+
+        <item>Invert</item>
+        <item>2s Cmpl</item>
+
+        <item>And In</item>
+        <item>Or In</item>
+        <item>Xor Int</item>
+
+        <item>Sh Left</item>
+        <item>Sh Right</item>
+
+        <item>Rot Left</item>
+        <item>Rot Right</item>
+    </string-array>
 
 
-
-
-    <!-- Activity Display Message Strings -->
-    <string name="title_activity_display_message">My Message</string>
 
 
 
