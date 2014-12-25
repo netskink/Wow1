@@ -3,6 +3,7 @@ package net.skink.wow1;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -40,6 +41,13 @@ public class MainActivity extends Activity  implements AdapterView.OnItemSelecte
     MenuItem menuItemToText;
 
 
+
+    //the custom view
+    private MyView customViewMyView;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +77,11 @@ public class MainActivity extends Activity  implements AdapterView.OnItemSelecte
         // Set this activity to listen for the spinner events.
         spinner.setOnItemSelectedListener(this);
 
+        //get reference to the custom view
+        customViewMyView = (MyView)findViewById(R.id.view_my_custom_view);
+
+        Drawable d = getResources().getDrawable(android.R.drawable.ic_btn_speak_now);
+        customViewMyView.setExampleDrawable(d);
     }
 
 
@@ -162,6 +175,14 @@ public class MainActivity extends Activity  implements AdapterView.OnItemSelecte
                 if (checked) {
                     if (radioButtonInText.isChecked()) {
                         onTextToAsciiHex();
+                    } else if (radioButtonInHex.isChecked()) {
+                        editTextOutput.setText(editTextInput.getText());
+                    } else if (radioButtonInBase64.isChecked()) {
+
+                        String stringInput = editTextInput.getText().toString();
+                        String stringConverted = JfdUtils.base64ToText(stringInput);
+                        stringConverted = JfdUtils.textToAsciiHex(stringConverted);
+                        editTextOutput.setText(stringConverted);
                     }
 
 //                    menuItemToAscii.setVisible(false);
@@ -194,10 +215,8 @@ public class MainActivity extends Activity  implements AdapterView.OnItemSelecte
 
                         stringConverted = JfdUtils.textToBase64(stringConverted);
                         editTextOutput.setText(stringConverted);
-
-
-
-
+                    } else if (radioButtonInBase64.isChecked()) {
+                        editTextOutput.setText(editTextInput.getText());
                     }
 
                 }

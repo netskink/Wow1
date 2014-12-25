@@ -1,5 +1,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
@@ -27,6 +29,7 @@
             android:id="@+id/textView3" />
     </LinearLayout>
 
+    <!-- row 2 -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -55,7 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Base64"
-                android:id="@+id/radioButtonInBase64" />
+                android:id="@+id/radioButtonInBase64"
+                android:onClick="onRadioButtonInClicked" />
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -67,8 +71,7 @@
 
     </LinearLayout>
 
-    <!-- row 2 -->
-
+    <!-- row 3 -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -104,7 +107,7 @@
 
 
 
-    <!-- row 3 -->
+    <!-- row 4 -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -117,6 +120,7 @@
             android:id="@+id/textView4" />
     </LinearLayout>
 
+    <!-- row 5 -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -160,6 +164,7 @@
         </RadioGroup>
     </LinearLayout>
 
+    <!-- row 6 -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -184,6 +189,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinner" />
+    </LinearLayout>
+
+    <!-- row 7 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <view
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            class="net.skink.wow1.MyView"
+            android:id="@+id/view_my_custom_view"
+            custom:exampleString="john"
+            custom:exampleColor="#ff0099"
+            custom:exampleDimension="24sp"/>
     </LinearLayout>
 
 
