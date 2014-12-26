@@ -177,7 +177,7 @@ public class JfdUtils {
     public static String textToAsciiHex(String stringInputText) {
 
         byte[] b = stringInputText.getBytes();
-        Log.d("JFD", "b = " + b[0] + b[1] + b[2]);
+//        Log.d("JFD", "b = " + b[0] + b[1] + b[2]);
 
         // b[n] = decimal ascii value
 

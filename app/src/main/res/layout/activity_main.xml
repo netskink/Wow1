@@ -17,6 +17,23 @@
 
 
     <!-- row 1 -->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <view
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            class="net.skink.wow1.MyView"
+            android:id="@+id/view_my_custom_view"
+            custom:exampleString="john"
+            custom:exampleColor="#ff0099"
+            custom:exampleDimension="24sp"/>
+    </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -30,6 +47,7 @@
     </LinearLayout>
 
     <!-- row 2 -->
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -38,7 +56,8 @@
         <RadioGroup
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -192,20 +211,6 @@
     </LinearLayout>
 
     <!-- row 7 -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <view
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            class="net.skink.wow1.MyView"
-            android:id="@+id/view_my_custom_view"
-            custom:exampleString="john"
-            custom:exampleColor="#ff0099"
-            custom:exampleDimension="24sp"/>
-    </LinearLayout>
 
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 
@@ -21,9 +22,14 @@ public class MyView extends View {
     private Drawable mExampleDrawable;
 
     private TextPaint mTextPaint;
+    private Paint mLinePaint;
     private float mTextWidth;
     private float mTextHeight;
 
+    public int intNumInputBytes;
+    public int intNumOutputBytes;
+    public int aInputCount[] = new int[256];
+    public int aOutputCount[] = new int[256];
 
 
 
@@ -65,6 +71,10 @@ public class MyView extends View {
         mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setTextAlign(Paint.Align.LEFT);
 
+        // JFD
+        mLinePaint = new Paint();
+        mLinePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+
         // Update TextPaint and text measurements from attributes
         invalidateTextPaintAndMeasurements();
     }
@@ -73,6 +83,10 @@ public class MyView extends View {
         mTextPaint.setTextSize(mExampleDimension);
         mTextPaint.setColor(mExampleColor);
         mTextWidth = mTextPaint.measureText(mExampleString);
+
+        int intBlack = getResources().getColor(android.R.color.black);
+        mLinePaint.setColor(intBlack);
+
 
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
         mTextHeight = fontMetrics.bottom;
@@ -99,20 +113,105 @@ public class MyView extends View {
 //                mTextPaint);
 
         // Draw the example drawable on top of the text.
-        if (mExampleDrawable != null) {mExampleDrawable.setBounds(paddingLeft, paddingTop,
-                    paddingLeft + contentWidth, paddingTop + contentHeight);
-            mExampleDrawable.draw(canvas);
-        }
+//        if (mExampleDrawable != null) {
 
-        // Draw the text.
-        canvas.drawText(mExampleString,
-                paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + (contentHeight + mTextHeight) / 2,
+//            mExampleDrawable.setBounds(paddingLeft,
+//                    paddingTop,
+//                    paddingLeft + contentWidth,
+//                    paddingTop + contentHeight);
+
+//            mExampleDrawable.draw(canvas);
+//       }
+
+
+        // Draw the text in center
+//        canvas.drawText(mExampleString,
+//                paddingLeft + (contentWidth - mTextWidth) / 2,
+//                paddingTop + (contentHeight + mTextHeight) / 2,
+//                mTextPaint);
+
+
+        // Draw the text in top left
+//        canvas.drawText( mExampleString,
+//                paddingLeft + (contentWidth - mTextWidth) / 4,
+//                paddingTop + (contentHeight + mTextHeight) / 4,
+//                mTextPaint);
+
+//        float left = contentWidth / 8;
+//        float top = contentHeight / 8;
+//        float right = contentWidth / 4;
+//        float bottom = contentHeight / 4;
+        //canvas.drawOval(left,top,right,bottom,mTextPaint);
+        //public void drawOval (float left, float top, float right, float bottom, Paint paint)
+//        float startAngle = 0;
+//        float sweepAngle = 135;
+//        boolean useCenter = true;
+//        canvas.drawArc(left, top, right, bottom, startAngle, sweepAngle, useCenter, mLinePaint);
+
+        // draw input x-axis
+        float startX = 0;
+        float startY = contentHeight / 3;
+        float stopX = contentWidth;
+        float stopY = contentHeight / 3;
+        canvas.drawLine(startX, startY, stopX, stopY, mLinePaint);
+
+        // draw input y-axis
+        startX = 0;
+        startY = 0;
+        stopX = 0;
+        stopY = contentHeight / 3;
+        canvas.drawLine(startX, startY, stopX, stopY, mLinePaint);
+
+
+        // draw output x-axis
+        startX = 0;
+        startY = contentHeight;
+        stopX = contentWidth;
+        stopY = contentHeight;
+        canvas.drawLine(startX, startY, stopX, stopY, mLinePaint);
+
+
+        // draw output y-axis
+        startX = 0;
+        startY = contentHeight * 2 / 3;
+        stopX = 0;
+        stopY = contentHeight;
+        canvas.drawLine(startX, startY, stopX, stopY, mLinePaint);
+
+
+        //Added in API level 21
+        //Draw the specified oval using the specified paint. The oval will be filled or framed based on the Style in the paint.
+
+
+        // Draw the number of input bytes
+        String stringNumBytes;
+        stringNumBytes = Integer.toString(intNumInputBytes);
+        canvas.drawText(stringNumBytes,
+                paddingLeft + (contentWidth - mTextWidth) / 16,
+                paddingTop + (contentHeight + mTextHeight) / 16,
+                mTextPaint);
+
+        // Draw the number of output bytes
+        stringNumBytes = Integer.toString(intNumOutputBytes);
+        canvas.drawText(stringNumBytes,
+                paddingLeft + (contentWidth - mTextWidth) / 16,
+                paddingTop + (contentHeight + mTextHeight) * 2/3,
                 mTextPaint);
 
 
+        // draw a line representing the count of each possible value 0-255
+        if (0 != intNumInputBytes) {
 
+            for (int i = 0; i < 256; i++) {
+                startX = contentWidth * i / 256;
+                startY = contentHeight / 3;
+                stopX = contentWidth * i / 256;
+                stopY = (contentHeight / 3) - (contentHeight / 3) * (float) (aInputCount[i]) / intNumInputBytes;
+                canvas.drawLine(startX, startY, stopX, stopY, mLinePaint);
+            }
 
+        }
+        Log.d("JFD", "The first byte value is " + Integer.toString(aInputCount[54] ));
     }
 
     /**

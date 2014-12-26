@@ -241,6 +241,39 @@ public class MainActivity extends Activity  implements AdapterView.OnItemSelecte
                 }
                 break;
         }
+
+
+        if (radioButtonInHex.isChecked()) {
+
+
+            customViewMyView.intNumInputBytes = editTextInput.getText().length();
+            customViewMyView.intNumOutputBytes = editTextOutput.getText().length();
+            int aCount[] = new int[256];
+            String stringValue = editTextInput.getText().toString();
+
+            String stringConverted = JfdUtils.hexToText(stringValue);
+
+            byte b[] = stringConverted.getBytes();
+            int i;
+            for (i = 0; i < b.length; i++) {
+                aCount[b[i]]++;
+            }
+            customViewMyView.aInputCount = aCount;
+        } else {
+            customViewMyView.intNumInputBytes = editTextInput.getText().length();
+            customViewMyView.intNumOutputBytes = editTextOutput.getText().length();
+            int aCount[] = new int[256];
+            String stringValue = editTextInput.getText().toString();
+            byte b[] = stringValue.getBytes();
+            int i;
+            for (i = 0; i < b.length; i++) {
+                aCount[b[i]]++;
+            }
+            customViewMyView.aInputCount = aCount;
+
+        }
+        customViewMyView.invalidate();
+
     }
 
     @Override
@@ -332,6 +365,19 @@ public class MainActivity extends Activity  implements AdapterView.OnItemSelecte
 
 //        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
         editTextInput.setText("");
+        customViewMyView.intNumInputBytes = editTextInput.getText().length();
+        customViewMyView.intNumOutputBytes = editTextOutput.getText().length();
+        int aCount[] = new int[256];
+        String stringValue = editTextInput.getText().toString();
+        byte b[] = stringValue.getBytes();
+        int i;
+        for (i=0;i<b.length;i++) {
+            aCount[b[i]]++;
+        }
+        customViewMyView.aInputCount=aCount;
+        customViewMyView.invalidate();
+
+
     }
 
     public void onClickToInput(View view) {
@@ -341,7 +387,27 @@ public class MainActivity extends Activity  implements AdapterView.OnItemSelecte
 //
 //        EditText editTextInput = (EditText) findViewById(R.id.editTextInput);
         editTextInput.setText(stringOutput);
+
+        customViewMyView.intNumInputBytes = editTextInput.getText().length();
+        customViewMyView.intNumOutputBytes = editTextOutput.getText().length();
+
+        int aCount[] = new int[256];
+        String stringValue = editTextInput.getText().toString();
+        byte b[] = stringValue.getBytes();
+        int i;
+        for (i=0;i<b.length;i++) {
+            aCount[b[i]]++;
+        }
+        customViewMyView.aInputCount=aCount;
+
+        customViewMyView.invalidate();
+
+
+
     }
+
+
+
 
 
 
